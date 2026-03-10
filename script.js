@@ -260,6 +260,3 @@ document.getElementById('publishQuestionBtn').addEventListener('click', () => {
 });
 
 window.updateUserInfo = updateUserInfo;
-
-
-
