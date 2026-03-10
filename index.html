@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quest Friends | Найди того, кто думает как ты</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Шапка -->
+        <div class="header">
+            <h1>🎮 Quest Friends</h1>
+            <div class="user-info">
+                <span id="userName"></span>
+                <button class="icon-btn" id="profileBtn">👤</button>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <div id="mainContent">
+            <!-- Экран загрузки -->
+            <div id="loadingScreen" class="screen active">
+                <div class="loader"></div>
+                <p>Загрузка вопросов...</p>
+            </div>
+
+            <!-- Экран ленты -->
+            <div id="feedScreen" class="screen">
+                <div class="stats-bar">
+                    <span>📝 Вопросов: <span id="todayQuestions">0</span>/5</span>
+                    <span>💬 Мэтчей: <span id="totalMatches">0</span></span>
+                </div>
+
+                <!-- Вопрос дня -->
+                <div class="daily-question">
+                    <div class="daily-badge">🌟 ВОПРОС ДНЯ</div>
+                    <div id="dailyQuestionContainer"></div>
+                </div>
+
+                <!-- Вопросы от пользователей -->
+                <h3>🔥 Вопросы друзей</h3>
+                <div id="questionsList" class="questions-list"></div>
+
+                <!-- Брендовые вопросы -->
+                <h3>📢 От брендов</h3>
+                <div id="brandQuestionsList" class="questions-list"></div>
+            </div>
+
+            <!-- Экран создания вопроса -->
+            <div id="createScreen" class="screen">
+                <h2>✨ Новый вопрос</h2>
+                <p class="hint">Твой вопрос = твоя личность</p>
+                
+                <div class="create-form">
+                    <select id="questionTheme" class="theme-select">
+                        <option value="cinema">🎬 Кино</option>
+                        <option value="music">🎵 Музыка</option>
+                        <option value="life">🌱 Жизнь</option>
+                        <option value="humor">😂 Юмор</option>
+                        <option value="food">🍕 Еда</option>
+                        <option value="travel">✈️ Путешествия</option>
+                    </select>
+
+                    <textarea 
+                        id="questionText" 
+                        class="question-input"
+                        placeholder="Напиши свой вопрос..."
+                        rows="2"
+                        maxlength="200"
+                    ></textarea>
+
+                    <div class="options-container">
+                        <div class="option-item">
+                            <input type="radio" name="correctOption" value="0" checked>
+                            <input type="text" id="opt0" placeholder="Вариант А" class="option-input">
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="correctOption" value="1">
+                            <input type="text" id="opt1" placeholder="Вариант Б" class="option-input">
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="correctOption" value="2">
+                            <input type="text" id="opt2" placeholder="Вариант В" class="option-input">
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="correctOption" value="3">
+                            <input type="text" id="opt3" placeholder="Вариант Г" class="option-input">
+                        </div>
+                    </div>
+
+                    <button class="btn primary" id="publishQuestionBtn">📢 Опубликовать вопрос</button>
+                </div>
+            </div>
+
+            <!-- Экран профиля -->
+            <div id="profileScreen" class="screen">
+                <h2>👤 Мой профиль</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="myQuestionsCount">0</div>
+                        <div class="stat-label">вопросов</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="myAnswersCount">0</div>
+                        <div class="stat-label">ответов</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="myMatchesCount">0</div>
+                        <div class="stat-label">совпадений</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="pendingMatches">0</div>
+                        <div class="stat-label">ждут ответа</div>
+                    </div>
+                </div>
+
+                <h3>📋 Мои вопросы</h3>
+                <div id="myQuestionsContainer" class="questions-list"></div>
+
+                <h3>⏳ Ожидают моего ответа</h3>
+                <div id="pendingAnswersContainer" class="questions-list"></div>
+
+                <button class="btn" id="createNewBtn">➕ Новый вопрос</button>
+            </div>
+        </div>
+
+        <!-- Нижняя навигация -->
+        <nav class="bottom-nav">
+            <button class="nav-btn" data-screen="feed">
+                <span class="nav-icon">🔥</span>
+                <span class="nav-label">Лента</span>
+            </button>
+            <button class="nav-btn" data-screen="create">
+                <span class="nav-icon">✨</span>
+                <span class="nav-label">Создать</span>
+            </button>
+            <button class="nav-btn" data-screen="profile">
+                <span class="nav-icon">👤</span>
+                <span class="nav-label">Профиль</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
