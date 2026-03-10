@@ -61,7 +61,7 @@ function publishQuestion(questionData) {
         authorId: currentUser.id,
         authorName: currentUser.firstName,
         createdAt: new Date().toISOString(),
-        theme: questionData.theme,
+        theme: 'general',
         text: questionData.text,
         options: questionData.options,
         correctOption: parseInt(questionData.correctOption),
@@ -129,7 +129,7 @@ function renderQuestionsList() {
     container.innerHTML = allQuestions.map(q => `
         <div class="question-card" data-id="${q.id}">
             <div class="question-header">
-                <span class="question-theme">${getThemeIcon(q.theme)} ${getThemeName(q.theme)}</span>
+                <span class="question-theme">❓
                 <span class="question-author">👤 ${q.authorName}</span>
             </div>
             <div class="question-text">${q.text}</div>
@@ -261,3 +261,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.updateUserInfo = updateUserInfo;
+
