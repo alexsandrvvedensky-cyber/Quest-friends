@@ -223,42 +223,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('publishQuestionBtn').addEventListener('click', () => {
-        const theme = document.getElementById('questionTheme').value;
-        const text = document.getElementById('questionText').value.trim();
-        const options = [
-            document.getElementById('opt0').value.trim(),
-            document.getElementById('opt1').value.trim(),
-            document.getElementById('opt2').value.trim(),
-            document.getElementById('opt3').value.trim()
-        ];
-        const correctOption = document.querySelector('input[name="correctOption"]:checked')?.value;
+        document.getElementById('publishQuestionBtn').addEventListener('click', () => {
+    const text = document.getElementById('questionText').value.trim();
+    const options = [
+        document.getElementById('opt0').value.trim(),
+        document.getElementById('opt1').value.trim(),
+        document.getElementById('opt2').value.trim(),
+        document.getElementById('opt3').value.trim()
+    ];
+    const correctOption = document.querySelector('input[name="correctOption"]:checked')?.value;
 
-        if (!text) {
-            tg.showAlert('Напишите вопрос!');
-            return;
-        }
+    if (!text) {
+        tg.showAlert('Напишите вопрос!');
+        return;
+    }
 
-        if (options.some(opt => !opt)) {
-            tg.showAlert('Заполните все варианты ответов');
-            return;
-        }
+    if (options.some(opt => !opt)) {
+        tg.showAlert('Заполните все варианты ответов');
+        return;
+    }
 
-        publishQuestion({
-            theme,
-            text,
-            options,
-            correctOption
-        });
-
-        document.getElementById('questionText').value = '';
-        options.forEach((_, i) => {
-            document.getElementById(`opt${i}`).value = '';
-        });
+    // Передаём фиксированную тему, так как поле удалено
+    publishQuestion({
+        theme: 'general',
+        text,
+        options,
+        correctOption
     });
+
+    document.getElementById('questionText').value = '';
+    options.forEach((_, i) => {
+        document.getElementById(`opt${i}`).value = '';
+    });
+});
 
     tg.MainButton.setText('Закрыть');
     tg.MainButton.onClick(() => tg.close());
 });
 
 window.updateUserInfo = updateUserInfo;
+
 
