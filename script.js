@@ -222,8 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showScreen('create');
     });
 
-    document.getElementById('publishQuestionBtn').addEventListener('click', () => {
-        document.getElementById('publishQuestionBtn').addEventListener('click', () => {
+document.getElementById('publishQuestionBtn').addEventListener('click', () => {
     const text = document.getElementById('questionText').value.trim();
     const options = [
         document.getElementById('opt0').value.trim(),
@@ -243,7 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Передаём фиксированную тему, так как поле удалено
     publishQuestion({
         theme: 'general',
         text,
@@ -262,5 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.updateUserInfo = updateUserInfo;
+
 
 
