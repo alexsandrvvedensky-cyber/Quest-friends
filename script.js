@@ -70,18 +70,29 @@ function publishQuestion(questionData) {
 function renderQuestionsList() {
     const container = document.getElementById('questionsList');
     if (!container) return;
+
     if (allQuestions.length === 0) {
         container.innerHTML = '<p class="hint">😢 Пока нет вопросов. Создайте первый!</p>';
         return;
     }
+
     container.innerHTML = allQuestions.map(q => `
-        <div class="question-card">
-            <div class="question-header"><span class="question-author">👤 ${q.authorName}</span></div>
+        <div class="question-card" data-id="${q.id}">
+            <div class="question-header">
+                <span class="question-theme">❓
+                <span class="question-author">👤 ${q.authorName}</span>
+            </div>
             <div class="question-text">${q.text}</div>
             <div class="question-options">
-                ${q.options.map((opt, idx) => `<button class="option-btn" onclick="window.handleAnswer('${q.id}', ${idx})">${String.fromCharCode(65 + idx)}. ${opt}</button>`).join('')}
+                ${q.options.map((opt, idx) => `
+                    <button class="option-btn" onclick="window.handleAnswer('${q.id}', ${idx})">
+                        ${String.fromCharCode(65 + idx)}. ${opt}
+                    </button>
+                `).join('')}
             </div>
-            <div class="question-footer"><span>👥 ${q.answers || 0} ответов</span></div>
+            <div class="question-footer">
+                <span>👥 ${q.answers || 0} ответов</span>
+            </div>
         </div>
     `).join('');
 }
@@ -156,3 +167,4 @@ document.addEventListener('DOMContentLoaded', () => {
         options.forEach((_, i) => document.getElementById(`opt${i}`).value = '');
     });
 });
+
